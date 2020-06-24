@@ -36,8 +36,9 @@
 		if(fnuser.result=true) {
 		var fnmatches= JSON.parse(httpGet2("https://fortniteapi.io/matches?account="+fnuser.account_id,"Authorization",apikey));
 		var fnstats= JSON.parse(httpGet2("https://fortniteapi.io/stats?account="+fnuser.account_id,"Authorization",apikey));
+                }
 		var fnshop= JSON.parse(httpGet2("https://fortniteapi.io/shop?lang=de","Authorization",apikey));
-		}
+		
 		
 		
 		
@@ -177,7 +178,7 @@ console.log("cover, toc, br news");
 		console.log(bild);
 		inhalt.push(
 		{text: fnstw.news[i].title, fontSize: 20},
-		{text: fnstw.news[i].date+", aktuell: "+fnbr.news[i].live+", AdSpace: "+fnstw.news[i].adspace},
+		{text: fnstw.news[i].date+", aktuell: "+fnstw.news[i].live+", AdSpace: "+fnstw.news[i].adspace},
 		{text: " "}
 		);
 		
@@ -199,6 +200,45 @@ console.log("cover, toc, br news");
 		);
 		
 		}
+
+                // creative news
+		console.log("creative news");
+		inhalt.push(
+		{text: " "},
+		{text: "Creative Mode News", fontSize: 30, alignment: 'center', pageBreak: 'before', tocItem: true},
+		{text: " "}
+		);
+		
+		for(i=0;i<fncreative.news.length;i++) {
+		var bildurl=fncreative.news[i].image;
+		var bild=httpGet("https://helloacm.com/api/image-to-base64/?url="+bildurl);
+		console.log(bildurl);
+		console.log(bild);
+		inhalt.push(
+		{text: fncreative.news[i].title, fontSize: 20},
+		{text: fncreative.news[i].date+", aktuell: "+fncreative.news[i].live+", AdSpace: "+fncreative.news[i].adspace},
+		{text: " "}
+		);
+		
+		if(bild!="") {
+		inhalt.push( {image: bild, width: 200} );
+		} else {
+		if(bildurl!="") {
+		inhalt.push( {qr: bildurl, fit: 200} );
+		} else {
+		inhalt.push( {text: "(Konnte kein Bild oder QR-Code erstellen)"} );
+		}
+		}
+		
+		inhalt.push(
+		{text: " "},
+		{text: fncreative.news[i].body},
+		{text: "______________________________"},
+		{text: " "}
+		);
+		
+		}
+
 		// map
 		console.log("map");
 		var karte=httpGet("https://helloacm.com/api/image-to-base64/?url=https://media.fortniteapi.io/images/map.png?showPOI=true");
