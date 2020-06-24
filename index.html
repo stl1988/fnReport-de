@@ -32,6 +32,7 @@
 		var datum=date.getTime()/1000;
 		var fnbr = JSON.parse(httpGet2("https://fortniteapi.io/news?lang=de&type=br","Authorization",apikey));
 		var fnstw = JSON.parse(httpGet2("https://fortniteapi.io/news?lang=de&type=stw","Authorization",apikey));
+		var fncreative = JSON.parse(httpGet2("https://fortniteapi.io/news?lang=de&type=creative","Authorization",apikey));
 		var fnuser = JSON.parse(httpGet2("https://fortniteapi.io/lookup?username="+pvar,"Authorization",apikey));
 		if(fnuser.result=true) {
 		var fnmatches= JSON.parse(httpGet2("https://fortniteapi.io/matches?account="+fnuser.account_id,"Authorization",apikey));
